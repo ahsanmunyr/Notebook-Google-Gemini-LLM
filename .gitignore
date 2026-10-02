@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated output (uncomment to keep it out of version control)
+# output/chapters/
+# output/summaries.json
+# output/book.md

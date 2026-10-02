@@ -1,0 +1,40 @@
+# AI Book Generator — settings
+# Any value omitted here falls back to a sensible default in generate.py.
+# For most people the defaults are fine — you only need to edit book-source.md.
+
+# Model used to write each chapter (the high-quality one).
+model: gemini-2.5-pro
+# Cheaper/faster model used to summarize chapters for the "story so far".
+summary_model: gemini-2.5-flash
+
+# Sampling
+temperature: 0.9             # higher = more creative prose
+summary_temperature: 0.3     # lower = more faithful summaries
+
+# Token limits
+max_output_tokens: 8192      # per chapter
+summary_max_tokens: 512      # per summary
+
+# Reliability
+max_retries: 5               # attempts per API call (exponential backoff)
+retry_base_delay: 2.0        # seconds; doubles each retry
+request_delay: 0.0           # seconds to wait between chapters (raise if you hit rate limits)
+
+# Context control
+# How many of the most recent previous-chapter summaries to include in each prompt.
+# 0 = include ALL previous summaries. For a very long book (100+ chapters) set e.g.
+# 20 to keep prompts small and cost down while preserving recent continuity.
+summary_window: 0
+
+# Fallback title if book-source.md has no "Title:" line.
+book_title: "My Book"
+
+# File/folder locations (relative to the project root). Defaults shown.
+paths:
+  book_source: book-source.md     # the single file you edit
+  chapters: chapters              # optional fallback: one file per chapter
+  style_guide: style_guide.txt    # optional: appended to context if the file exists
+  output_dir: output
+  output_chapters: output/chapters
+  summaries: output/summaries.json
+  book: output/book.md
